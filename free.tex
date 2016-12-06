@@ -1,0 +1,558 @@
+\documentclass[a4paper,titlepage]{article}
+
+%%%%%%%%%%%%%%%%%%page size%%%%%%%%%%%%%%%%%%
+% \paperwidth=65cm
+% \paperheight=160cm
+
+%%%%%%%%%%%%%%%%%%%Package%%%%%%%%%%%%%%%%%%%
+\usepackage[margin=3cm]{geometry}
+\usepackage{mathtools,amsthm,amssymb}
+\usepackage{centernot}
+\usepackage{yhmath}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage[square, comma, numbers, super, sort&compress]{natbib}
+\usepackage[unicode, pdfborder={0 0 0}, bookmarksdepth=-1]{hyperref}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[shortlabels, inline]{enumitem}
+\setenumerate{itemsep=0.2em,topsep=0.25em}
+\setitemize{itemsep=0.2em,topsep=0.25em}
+\setdescription{itemsep=0.2em,topsep=0.25em}
+\usepackage{xpatch}
+\usepackage{relsize}
+%\usepackage{parskip}
+\parskip=0.5em
+
+%\usepackage{tabto}     
+%\usepackage{soul}      
+%\usepackage{ulem}      
+%\usepackage{wrapfig}   
+%\usepackage{floatflt}  
+\usepackage{float}     
+\usepackage{caption}   
+\usepackage{subcaption}
+%\usepackage{setspace}  
+\usepackage{mdframed}  
+%\usepackage{multicol}  
+%\usepackage[abbreviations]{siunitx}
+%\usepackage{dsfont}   
+
+%%%%%%%%%%%%%%%%%%%TikZ%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{tikz-cd}
+%\usepackage{circuitikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzstyle{every picture}+=[remember picture]
+
+%%%%%%%%%%%%%%中文 Environment%%%%%%%%%%%%%%%
+\usepackage[CheckSingle, CJKmath]{xeCJK}  % xelatex 中文
+\usepackage{CJKulem}	% 中文字裝飾
+%\setCJKmainfont[BoldFont=cwTeX Q Hei]{cwTeX Q Ming}
+%\setCJKsansfont[BoldFont=cwTeX Q Hei]{cwTeX Q Ming}
+%\setCJKmonofont[BoldFont=cwTeX Q Hei]{cwTeX Q Ming}
+
+%%%%%%%%%%%%%%%%%font size%%%%%%%%%%%%%%%%%%%
+%\def\normalsize{\fontsize{10}{15}\selectfont}
+%\def\large{\fontsize{12}{18}\selectfont}
+%\def\Large{\fontsize{14}{21}\selectfont}
+%\def\LARGE{\fontsize{16}{24}\selectfont}
+%\def\huge{\fontsize{18}{27}\selectfont}
+%\def\Huge{\fontsize{20}{30}\selectfont}
+
+%%%%%%%%%%%%%%%Theme Input%%%%%%%%%%%%%%%%%%%
+%\input{themes/chapter/neat}
+%\input{themes/env/problist}
+
+%%%%%%%%%%%titlesec settings%%%%%%%%%%%%%%%%%
+%\titleformat{\chapter}{\bf\Huge}
+            %{\arabic{section}}{0em}{}
+%\titleformat{\section}{\centering\Large}
+            %{\arabic{section}}{0em}{}
+%\titleformat{\subsection}{\large}
+            %{\arabic{subsection}}{0em}{}
+%\titleformat{\subsubsection}{\bf\normalsize}
+            %{\arabic{subsubsection}}{0em}{}
+%\titleformat{command}[shape]{format}{label}
+            %{gutter}{before}[after]
+
+%%%%%%%%%%%%variable settings%%%%%%%%%%%%%%%%
+%\numberwithin{equation}{section}
+%\setcounter{secnumdepth}{4}
+%\setcounter{tocdepth}{1}
+%\setcounter{section}{0}
+%\graphicspath{{images/}}
+
+%%%%%%%%%%%%%%%page settings%%%%%%%%%%%%%%%%%
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\setlength{\headheight}{15pt}  % with titling
+\setlength{\droptitle}{-2.5cm}
+%\posttitle{\par\end{center}}  % distance between title and content
+\parindent=0pt % indent size
+%\parskip=1ex    % line space
+%\pagestyle{empty}  % empty: no page number
+%\pagestyle{fancy}  % fancy: fancyhdr
+
+% use with fancygdr
+%\lhead{\leftmark}
+%\chead{}
+%\rhead{}
+%\lfoot{}
+%\cfoot{}
+%\rfoot{\thepage}
+%\renewcommand{\headrulewidth}{0.4pt}
+%\renewcommand{\footrulewidth}{0.4pt}
+
+%\fancypagestyle{firststyle}
+%{
+  %\fancyhf{}
+  %\fancyfoot[C]{\footnotesize Page \thepage\ of \pageref{LastPage}}
+  %\renewcommand{\headrule}{\rule{\textwidth}{\headrulewidth}}
+%}
+
+%%%%%%%%%%%%%%%renew command%%%%%%%%%%%%%%%%%
+% \renewcommand{\contentsname}{Table of Content}
+% \renewcommand{\refname}{Reference}
+\renewcommand{\abstractname}{\LARGE Abstract}
+
+%%%%%%%%symbol and function settings%%%%%%%%%
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\inpd}{\langle}{\rangle} % inner product
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arccot}
+\DeclareMathOperator{\arccsc}{arccsc}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth}
+\newcommand{\np}[1]{\\[{#1}] \indent}
+\newcommand{\tr}[1]{{#1}^\mathrm{t}}
+%%%% Geometry Symbol %%%%
+\newcommand{\degree}{^\circ}
+\newcommand{\Arc}[1]{\wideparen{{#1}}}
+\newcommand{\Line}[1]{\overleftrightarrow{{#1}}}
+\newcommand{\Ray}[1]{\overrightarrow{{#1}}}
+\newcommand{\Segment}[1]{\overline{{#1}}}
+%%%% Math symbol %%%%
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\Nb}{\mathbb{N}}
+\newcommand{\Zb}{\mathbb{Z}}
+\newcommand{\Qb}{\mathbb{Q}}
+\newcommand{\Rb}{\mathbb{R}}
+\newcommand{\Cb}{\mathbb{C}}
+\newcommand{\Hb}{\mathbb{H}}
+\newcommand{\Fb}{\mathbb{F}}
+\newcommand{\Fbx}{\mathbb{F}^\times}
+\newcommand{\Qbx}{\mathbb{Q}^\times}
+\newcommand{\Rbx}{\mathbb{R}^\times}
+\newcommand{\Cbx}{\mathbb{C}^\times}
+\newcommand{\Hbx}{\mathbb{H}^\times}
+
+\usetikzlibrary{matrix}
+
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Exp}{Exp}
+\DeclareMathOperator{\Syl}{Syl}
+\newcommand{\ob}{\overline}
+\DeclareMathOperator{\ord}{ord}
+\DeclarePairedDelimiter{\gen}{\langle}{\rangle} % generator
+%\newcommand*\quot[2]{{^{\textstyle #1}\Big/_{\textstyle #2}}}
+\newcommand*\quot[2]{{#1}/{#2}}
+\newcommand\bij{\lhook\joinrel\twoheadrightarrow}
+\newcommand\toone{\hookrightarrow}
+\newcommand\onto{\twoheadrightarrow}
+\newcommand\acts{\curvearrowright}
+\newcommand\revacts{\curvearrowleft}
+
+% cycle group \cycle{1,2,3} => (1 2 3)
+\ExplSyntaxOn
+\NewDocumentCommand{\cycle}{ O{\;} m }
+ {
+  (
+  \alec_cycle:nn { #1 } { #2 }
+  )
+ }
+
+\seq_new:N \l_alec_cycle_seq
+\cs_new_protected:Npn \alec_cycle:nn #1 #2
+ {
+  \seq_set_split:Nnn \l_alec_cycle_seq { , } { #2 }
+  \seq_use:Nn \l_alec_cycle_seq { #1 }
+ }
+\ExplSyntaxOff
+
+\newcommand\Div{\,\big|\,}
+\newcommand\nDiv{\,\big\not|\,}
+\newcommand\relmiddle[1]{\mathrel{}\middle#1\mathrel{}}
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\renewcommand{\proofname}{\bf pf:}
+\newtheoremstyle{mystyle}% custom style
+  {6pt}{15pt}%      top and bottom margin
+  {}%               content style
+  {}%               indent
+  {\bf}%            head style
+  {.}%              after head
+  {1em}%            distance between head and content
+  {}%               Theorem head spec (can be left empty, meaning 'normal')
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{formula}{Formula}
+\newtheorem{conclusion}{Conclusion}
+\newtheorem{lemma}{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator*{\freeprod}{\raisebox{-0.4ex}{\scalebox{2}{$\ast$}}\!}
+\newcommand{\gid}{\mathfrak{G}}
+
+\makeatletter
+\newcommand{\proofpart}[1]{%
+  \par
+  \addvspace{\medskipamount}%
+  \noindent\emph{(#1)}\par\nobreak
+  \addvspace{\smallskipamount}%
+  \@afterheading
+}
+\makeatother
+
+\begin{document}
+  \begin{definition}
+    Let $\mathcal{S} = \{ G_\alpha : \alpha \in \mathcal{A} \}$ be a nonempty set of groups $G_{\alpha}$.
+    The {\bf free product} of $\mathcal{S}$ is a pair $(G, \{i_\alpha\})$ where $G$ is a group
+    and $i_{\alpha} :: G_\alpha \to G$ are homomorphism which has the following universal property:
+    For any group $H$ and homomorphisms $\varphi_\alpha :: G_\alpha \to H$, 
+    there exists a unique group homomorphism $\varphi :: G \to H$ such that $\varphi \circ i_\alpha = \varphi_\alpha$ for
+    all $\alpha \in \mathcal{A}$ (e.g., the diagram below commutes).
+    We write $G = \freeprod_\alpha G_\alpha$ (some also write
+    $G = \prod^* G_\alpha$ or $G = \coprod G_\alpha$).
+  \end{definition}
+
+  \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+      \matrix (m) [matrix of math nodes, row sep=3em, column sep=4em] {
+        G_\alpha & \freeprod_\alpha G_\alpha \\
+         & H \\
+      };
+      \path[-latex]
+      (m-1-1) edge node[above]{$i_\alpha$} (m-1-2);
+
+      \path[-latex]
+      (m-1-2) edge node[right]{$\exists \varphi$} (m-2-2);
+
+      \path[-latex]
+      (m-1-1) edge node[midway, below left, xshift=0.1cm, yshift=0.1cm]{$\varphi_\alpha$} (m-2-2);
+    \end{tikzpicture}
+    \caption{The diagram of the free product}
+  \end{figure}
+
+  \begin{remark}
+    The free product could also be defined as the {\bf coproduct} of $\{ G_\alpha \}$ if we consider the morphisms
+    as group homomorphisms in the category of groups.
+  \end{remark}
+
+
+  \begin{definition}
+    A {\bf word} (respect to free product) is a finite sequence $g_1 g_2 \cdots g_n$ such that
+    each $g_i$ is in some $G_\alpha$, and each $g_i$ in it is called a {\bf factor}.
+    We shall denote the empty word by $1$. The {\bf length}
+    of a word is the number of factors in it. Define $W(\{G_\alpha\})$ or simply $W$ 
+    to be the set of all the words. For each $g$, let $\gid(g)$ be the group which $g$ belongs, 
+    and $g^{-1}$ be the inverse of $g$ in that group.
+
+    Write $xy$ as the {\bf concatenate} of two words $x, y$.
+
+    We define two {\bf reducing} operations on words
+    \begin{enumerate}
+      \item Drop a factor $g_i$ which is the identity element.
+      \item Collapse two factors $g_i g_{i+1}$ to a single one $g^*$ if $\gid(g_i) = \gid(g_{i+1})$
+        and their product in that group is $g^*$.
+    \end{enumerate}
+    Together with the inverse of these two reducing operations, we have four operations
+    that could alter a word.
+
+    Two words $x$ and $y$ are said to be {\bf equivalent} if there is a finite sequence of 
+    operations that change $x$ to $y$.
+
+    A word $x$ is a {\bf reduced word} if no reducing operation could be preform on it. That is,
+    $x$ contains no factor $g_i$ which is the identity of a group $G_\alpha$ and contains no
+    two consecutive factors $g_i, g_{i+1}$ that lies in the same group.
+  \end{definition}
+  \begin{proposition}
+    The statement above defines a valid equivalent relation $\sim$.
+  \end{proposition}
+  \begin{proof}
+    We check that
+    \begin{itemize}
+      \item $x \sim x$ clearly from definition.
+      \item $x \sim y \implies y \sim x$ since we have inverse operations.
+      \item $x \sim y \land y \sim z \implies x \sim z$ since we could combine the sequence 
+        of operations that changes $x$ to $y$ and changes $y$ to $z$ to obtain a sequence 
+        of operations that changes $x$ to $z$.
+    \end{itemize}
+  \end{proof}
+
+  \begin{proposition}
+    Free product exists and is unique up to isomorphism.
+  \end{proposition}
+
+  \begin{proof}[Proof of existence]
+    Denote the equivalence classes by $[x]$ using the equivalence relation mentioned above.
+    Let $G = W\!/\mathord\sim = \{ [x] : x \in W \}$ and define the multiplication as 
+    $[x][y] = [xy]$. We shall check that the multiplication is well defined.
+
+    Suppose that $x$ and $x'$ differ by only one operations. Then for all $y$, it is easy to 
+    see that $xy \sim x'y$ and $yx \sim yx'$ since we could still preform the same kind of 
+    operation on the $x, x'$ part and turn the former word to the later. Iteration of this
+    kind of relationship show that $v \sim v'$ and $w \sim w'$ implies $vw \sim v'w'$. Hence 
+    the multiplication is well defined.
+
+    Then we check that with this multiplication, $G$ is indeed a group.
+    \begin{description}[style=standard]
+      \item[associative:] Simply by the associative of word concatenate.
+      \item[indentity:] The equivalent class of empty word $[1]$ is the indentity obviously.
+      \item[inverse:] For any word $x = g_1 g_2 \cdots g_n$. Let $y = g^{-1}_n g^{-1}_{n-1} \cdots g^{-1}_1$.
+        It is easy to see that $xy = yx = 1$, hence $[x][y] = [y][x] = [1]$.
+    \end{description}
+    Let $i_\alpha(g) = [g]$, then each $i_\alpha$ is a homomorphism since $i_\alpha(g_1 g_2) = [g_1 g_2]
+    = [g_1] [g_2] = i_\alpha(g_1) i_\alpha(g_2)$.
+
+    Now, given $H$ and homomorphisms $\varphi_\alpha$, we shall construct $\varphi$. First define 
+    $\Phi :: W \to H$ by
+    \[ 
+      \Phi(w) =
+      \begin{cases}
+        \, 1_H & \text{if } w \text{ is the empty word.} \\
+        \, \varphi_\alpha(g) & \text{if } w = g \text{ has length 1 and } g \in G_\alpha. \\ 
+        \, \Phi(g) \Phi(w') & \text{otherwise, and let } w = g w'. \\ 
+      \end{cases}
+    \]
+    It is easy to see that $\Phi(w_1 w_2) = \Phi(w_1) \Phi(w_2)$. Let $\varphi([w]) = \Phi(w)$ for
+    each $[w] \in G$ and we shall check that it is well defined. It is equivalent to
+    ensure that $w \sim w' \implies \Phi(w) = \Phi(w')$. So we prove that
+    \begin{itemize}
+      \item $\Phi(w_1 w_2) = \Phi(w_1 1_{G_\alpha} w_2)$: Since $\Phi(w_1 1_{G_\alpha} w_2) 
+        = \Phi(w_1) \Phi(1_{G_\alpha}) \Phi(w_2) = \Phi(w_1) \varphi_\alpha(1_{G_\alpha}) \Phi(w_2)
+        = \Phi(w_1) \Phi(w_2) = \Phi(w_1 w_2)$ by the fact that every homomorphism $\varphi_\alpha$ maps
+        identity to identity.
+      \item $\Phi(w_1 g w_2) = \Phi(w_1 g_1 g_2 w_2)$, if $g = g_1 g_2$: WLOG assume $g \in G_\alpha$, then 
+        $\Phi(w_1 g w_2) = $ \\
+        $ \Phi(w_1) \phi_\alpha(g) \Phi(w_2) = \Phi(w_1) \phi_\alpha(g_1 g_2) \Phi(w_2)
+        = \Phi(w_1) \phi_\alpha(g_1) \phi_\alpha(g_2) \Phi(w_2) = \Phi(w_1 g_1 g_2 w_2)$. 
+    \end{itemize}
+    Hence if $w \sim w'$, using the two equalities above and iterate through a sequences of
+    operator that changes $w$ to $w'$, we found that $\Phi(w) = \Phi(w')$, thus $\varphi$ is
+    well defined. Also $\varphi([w_1][w_2]) = \varphi([w_1 w_2]) = \Phi(w_1 w_2) = \Phi(w_1) \Phi(w_2)
+    = \varphi([w_1]) \varphi([w_2])$, so $\varphi$ is indeed a homomorphism.
+
+    Finally, we show that $\varphi$ is unique. It is easy to see that each element
+    $[w] \in G$ could be generate by the equivalent classes of words with length $1$, 
+    and for each $g_\alpha$ in each $G_\alpha$, $\varphi([g_\alpha]) = \varphi(i_\alpha(g_\alpha)) =
+    \varphi_\alpha(g_\alpha)$ is determined, hence $\varphi$ is unique.
+  \end{proof}
+
+  \begin{proof}[Proof of uniqueness]
+    The $G$ constructed above is a coproduct. By the uniqueness of coproduct, the proof is complete.
+  \end{proof}
+
+  Since we construct free product by equivalence class, some may wish to find a canonical
+  representative for each equivalence class. So we prove the following proposition.
+
+  \begin{proposition}
+    Each word
+  \end{proposition}
+
+  \begin{proof}
+    Let $w = g_1 g_2 \cdots g_n$ is a word in $W$. We associate to $w$ a sequence of reduced words
+    $x_0, x_1, \cdots, x_n$ in $W$ define by the following recursive algorithm: \\
+    Let $x_0 = 1$, the empty word. If $x_{i-1} = h_1 \cdots h_k$ (when $x_{i-1}$ is an empty word, $k = 0$),
+    define $x_i$ by
+    \[
+      x_i = \begin{cases}
+        h_1 \cdots h_k & \text{if } g_i = 1_{\gid(g_i)} \\
+        g_i & \text{otherwise, if } k = 0 \\
+        h_1 \cdots h_k g_i & \text{otherwise, if } \gid(h_k) \neq \gid(g_i) \\
+        h_1 \cdots h_k & \text{otherwise, if } h_k g_i = 1_{\gid(g_i)} \\
+        h_1 \cdots h_{k-1} g^* & \text{otherwise, and let } h_k g_i = g^* \neq 1_{\gid(g_i)} \\
+      \end{cases}
+    \]
+    and let $r(w) = x_n$.
+
+    Then we could check inductively such that for each $i$, the following holds:
+    \begin{itemize}
+      \item $x_i \sim g_1 g_2 \cdots g_i$, since in every cases $x_i$ could be transformed from $x_{i-1} g_i$
+        by some reducing operations. And we've already prove that $x \sim x', y \sim y' \implies xy \sim x'y'$,
+        hence $x_i \sim x_{i-1} g_i \sim g_1 g_2 \cdots g_i$.
+      \item Each $x_i$ is a reduced word. Since by induction we know that $x_{i-1} = h_1 \cdots h_k$ is reduced. 
+        So if $x_i$ is obtain by case \#$1, 2, 4$, $x_i$ is a reduced word. In case \#3, because $g_i \neq 1_{\gid(g_i)}$
+        and $\gid(g_i) \neq \gid(h_k)$, and in case \#5, $g^* \neq 1_{\gid(g^*)} \text{ and } \gid(g^*) = h_k \neq h_{k-1}$,
+        so $x_i$ is a reduced word in both case.
+    \end{itemize}
+    So each word $w$ is equivalent to a reduce word $r(w)$.
+
+    If $w = g_1 \cdots g_n$ is reduced, than $x_1$ is obtained by the second case, and $x_i, i > 1$ is
+    obtained by the third case, hence $r(w) = g_1 \cdots g_n = w$.
+
+    Now consider the equivalent words
+
+  \end{proof}
+
+  \begin{proposition}
+    Let $\mathcal{S} = \{ G_\alpha : \alpha \in \mathcal{A} \}$ be a set of groups, and suppose that
+    $\big\langle S_\alpha \bigm| R_\alpha \big\rangle$ is a presentation, then 
+    $\Big\langle \bigcup\limits_\alpha S_\alpha \mathrel{\Big|} \bigcup\limits_\alpha R_\alpha \Big\rangle$
+    is a presentation of the free product $\freeprod_\alpha G_\alpha$.
+  \end{proposition}
+
+  Recall that $\big\langle S \bigm| R \big\rangle$ is defined to be $F(S) / N(R)$ where $F(S)$ is
+  the free group of $S$ and $N(R)$ is the smallest normal subgroup containing $R$.
+
+  \begin{proof}
+    Let $S = \bigcup_\alpha S_\alpha, R = \bigcup_\alpha R_\alpha$ and define 
+    $G = \big\langle S \bigm| R \big\rangle$. Now consider the function $\psi$ which
+    carry each element $x \in S_\alpha$ to $F(S)$ by:
+    \begin{enumerate}
+      \item First carry it from $S_\alpha$ into $S$ by the inclusion map.
+      \item Then carry it from $S$ into $F(S)$ by the mapping given by the free group.
+    \end{enumerate}
+    Now by the universal property of the free group, there exist a map 
+    $\tilde{f}_\alpha :: F(S_\alpha) \to F(S)$. It is easy to see that $\tilde{f}_\alpha$
+    simply maps a word $w \in F(S_\alpha)$ to the same word in $F(S)$.
+    Compose with the quotient map $q$ from $F(S)$ to $G = F(S) / N(R)$, we get a map $f_\alpha$ from
+    $F(S_\alpha)$ to $G$. 
+
+    Now, let $q_\alpha$ be the quotient map from $F(S_\alpha)$ to $G_\alpha$.
+    For each word $r \in R_\alpha \subseteq F(S_\alpha)$, $\tilde{f}_\alpha$ send $r$ into $R$,
+    so $f_\alpha(r) = 1_G$, hence $\ker q_\alpha = N(R_\alpha) \subseteq \ker f$ since $N(R_\alpha)$ is the smallest
+    normal subgroup containing $R_\alpha$ and a kernal is always normal. By factor theorem, $f_\alpha$
+    descends to a homomorphism $i_\alpha :: G_\alpha \to G$.
+
+    If we could prove that $(G, i_\alpha)$ has the universal property of a free product, by the uniqueness
+    of free product we would have $G \cong \freeprod_\alpha G_\alpha$.
+
+    Let $H$ be a group, and let $\varphi_\alpha :: G_\alpha \to H$ be a system of homomorphisms.
+    Consider $\tilde{\varphi}_\alpha :: F(S_\alpha) \to H$ by $\tilde{\varphi}_\alpha = \varphi \circ q_\alpha$.
+    Define $\tilde{g} :: S \to H$ which sending $x \in S$ by
+    \begin{enumerate}
+      \item First carry $x$ to one of $S_\alpha$ by the inverse of inclusion map $\iota^{-1}$, 
+        it could be done since $S_\alpha$ is consider to be disjoint.
+      \item Then send into $F(S_\alpha)$ by the mapping given by the free group.
+      \item Finally send into $H$ by $\tilde{\varphi}_\alpha$.
+    \end{enumerate}
+    Since $F(S)$ is the free group of $S$, by its universal property, exists a homomorphism $g :: F(S) \to H$.
+    Now for each $r \in R \subseteq F(S)$, $r$ lies in a unique $R_\alpha$, so
+    \[ g(r) = \tilde{q}_\alpha(r) = \varphi_\alpha(q_\alpha(r)) = \varphi_\alpha(1_{G_\alpha}) = 1_H. \]
+    Consequently $\ker q = N(R) \subseteq \ker g$, and by factor theorem, $g$ descends into a
+    homomorphism $\varphi :: G \to H$. This $\varphi$ satisfies:
+    \[
+      \varphi \circ i_\alpha \circ q_\alpha = \varphi \circ f_\alpha
+      = \varphi \circ q \circ \tilde{f}_\alpha
+      = g \circ \tilde{f}_\alpha
+      = \tilde{\varphi}_\alpha
+      = \varphi_\alpha \circ q_\alpha
+    \]
+    and notice that $q_\alpha$ onto $G_\alpha$, hence we conclude that $\varphi \circ i_\alpha = \varphi_\alpha$.
+    which proof that $G$ has the desire mapping required by the universal property for any $H$.
+    \begin{figure}[h]
+      \centering
+      \begin{tikzpicture}
+        \matrix (m) [matrix of math nodes, row sep=3em, column sep=4em] {
+          S_\alpha & F(S_\alpha) & G_\alpha & H \\
+          S & F(S) & G & \\
+        };
+        \path[-latex]
+        (m-1-1.260) edge node[left]{$\iota$} (m-2-1.100);
+
+        \path[latex-]
+        (m-1-1.280) edge node[right, yshift=0.6mm]{$\iota^{-1}$} (m-2-1.80);
+
+        \path[-latex]
+        (m-1-1) edge node[above]{} (m-1-2);
+
+        \path[-latex]
+        (m-2-1) edge node[above]{} (m-2-2);
+        
+        \path[-latex]
+        (m-1-2) edge node[above]{$q_\alpha$} (m-1-3);
+
+        \path[-latex]
+        (m-2-2) edge node[below]{$q$} (m-2-3);
+
+        \path[-latex]
+        (m-1-3) edge node[above]{$\varphi_\alpha$} (m-1-4);
+
+        \path[-latex]
+        (m-1-3) edge node[pos=0.65, right, xshift=-0.5mm, yshift=-0.5mm]{$i_\alpha$} (m-2-3);
+
+        \path[-latex]
+        (m-2-3.0) edge node[midway, below]{$\varphi$} (m-1-4.270);
+
+        \path[-latex]
+        (m-1-2) edge node[pos=0.35, left]{$\tilde{f}$} (m-2-2);
+
+        \path[-latex]
+        (m-1-2) edge node[pos=0.3, above]{$f$} (m-2-3);
+
+        \path[-latex]
+        (m-1-1) edge node[midway, above]{$\psi$} (m-2-2);
+
+        \path[-latex]
+        (m-2-1) edge node[pos=0.65, above, yshift=-0.5mm]{$g$} (m-1-4);
+
+        \path[-latex]
+        (m-2-2) edge node[pos=0.8, below, yshift=0.5mm]{$\tilde{g}$} (m-1-4.210);
+
+        %\path[-latex]
+        %(m-1-1) edge node[midway, below left, xshift=0.1cm, yshift=0.1cm]{$\varphi_\alpha$} (m-2-2);
+      \end{tikzpicture}
+      \caption{The compute diagram in the proof.}
+    \end{figure}
+
+    Finally, for the uniqueness of $\varphi$, if $\varphi_\alpha = i_\alpha \circ \varphi$, 
+    then consider $h = \varphi \circ q$, since
+    \[ \varphi_\alpha \circ q_\alpha = \varphi \circ i_\alpha \circ q_\alpha
+      = \varphi \circ f_\alpha = \varphi \circ q \circ \tilde{f}_\alpha = h \circ \tilde{f}_\alpha. \]
+    So $h$ is determined for all $x \in \bigcup\limits_\alpha \Image{\tilde{f}_\alpha}$. But 
+    $\bigcup\limits_\alpha \Image{\tilde{f}_\alpha}$ contains all generator of $F(S)$ (i.e., all the 
+    words with length $1$), hence $h$ is uniquely determined. Since $q$ is onto, we conclude 
+    that $\varphi$ is also uniquely determined.
+
+    Hence we prove that $G$ satisfies the universal property, and hence 
+    $ \Big\langle \bigcup\limits_\alpha S_\alpha \mathrel{\Big|} \bigcup\limits_\alpha R_\alpha \Big\rangle
+    \cong \freeprod_\alpha G_\alpha $.
+  \end{proof}
+\end{document}
