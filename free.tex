@@ -389,11 +389,12 @@
     The $G$ constructed above is a coproduct. By the uniqueness of coproduct, the proof is complete.
   \end{proof}
 
-  Since we construct free product by equivalence class, some may wish to find a canonical
+  Since we construct free product by equivalence classes, some may wish to find a canonical
   representative for each equivalence class. So we prove the following proposition.
 
   \begin{proposition}
-    Each word
+    Each word is equivalent to exactly one reduced word, and hence each equivalent class
+    has a unique reduced word.
   \end{proposition}
 
   \begin{proof}
@@ -406,7 +407,7 @@
         h_1 \cdots h_k & \text{if } g_i = 1_{\gid(g_i)} \\
         g_i & \text{otherwise, if } k = 0 \\
         h_1 \cdots h_k g_i & \text{otherwise, if } \gid(h_k) \neq \gid(g_i) \\
-        h_1 \cdots h_k & \text{otherwise, if } h_k g_i = 1_{\gid(g_i)} \\
+        h_1 \cdots h_{k-1} & \text{otherwise, if } h_k g_i = 1_{\gid(g_i)} \\
         h_1 \cdots h_{k-1} g^* & \text{otherwise, and let } h_k g_i = g^* \neq 1_{\gid(g_i)} \\
       \end{cases}
     \]
@@ -428,7 +429,68 @@
     obtained by the third case, hence $r(w) = g_1 \cdots g_n = w$.
 
     Now consider the equivalent words
+    \[ w = g_1 \cdots g_j g_{j+1} \cdots g_n \quad\text{and}\quad w' = g_1 \cdots g_j 1_{G_\alpha} g_{j+1} \cdots g_n \]
+    which induce $x_0, \cdots, x_n$ and $x'_0, \cdots, x'_{n+1}$ by the algorithm above.
+    We have $x_j = x'_j$, and $x'_{j+1}$ would be produce by case \#1 and hence $x'_{j+1} = x'_j = x_j$.
+    So after appending the same factors $g_{j+1} \cdots g_n$, the output should be the same, hence
+    $x_n = x'_{n+1} \implies r(w) = r(w')$.
 
+    Next consider the equivalent words
+    \[ w = g_1 \cdots g_{j-1} g_j g_{j+1} g_{j+2} \cdots g_n 
+      \quad\text{and}\quad w' = g_1 \cdots g_{j-1} g^* g_{j+2} \cdots g_n \]
+    similarly, would induce $x_0, \cdots, x_n$ and $x'_0, \cdots, x'_{n-1}$ by the algorithm above and
+    we have $x_{j-1} = x'_{j-1}$. Let $x_{j-1} = h_1 h_2 \cdots h_k$. 
+    Now there are a lot of painful cases to check.
+    \begin{itemize}
+      \item $g_j = 1_{\gid(g_j)}$: Then $g^* = g_{j+1}$, so this case turn out to be the case above. ($w$
+        is formed by inserting an identity in $w'$). Similar argument holds when $g_{j+1} = 1_{\gid(g_j)}$,
+        hence we could assume $g_j, g_{j+1} \neq 1_{\gid(g_j)}$ below.
+      \item otherwise, $k = 0$, or $k \neq 0$ but $\gid(h_k) \neq \gid(g_j)$. There are two cases:
+        \begin{itemize}
+          \item $g^* = 1_{\gid(g_j)}$: Then $x'_j = x_{j-1}$ (case \#1), $x_j = x_{j-1} g_j$ (case \#2 
+            or \#3) and $x_{j+1} = x_{j-1}$ (case \#4).
+          \item $g^* \neq 1_{\gid(g_j)}$: Then $x'_j = x_{j-1} g^*$ (case \#2, \#3),
+            $x_j = x_{j-1} g_j$ (case \#2, \#3) and $x_{j+1} = x_{j-1} g^*$ (case \#3).
+        \end{itemize}
+      \item otherwise $\gid(h_k) = \gid(g_j)$, and if $h_k g_j = 1_{\gid(g_j)}$,
+        let $y = h_1 \cdots h_{k-1}$:
+        \begin{itemize}
+          \item $g^* = 1_{\gid(g_j)}$: Then $g_j g_{j+1} = g^* = 1 = h_k g_j$, which forces
+            $h_k = g_{j+1} = g^{-1}_j \neq 1_{\gid(g_j)}$.  
+            Hence $x'_j = x_{j-1}$ (case \#1), $x_j = h_1 \cdots h_{k-1}$
+            (case \#4) and $x_{j+1} = h_1 \cdots h_k = x_{j-1}$ (case \#3, since $x_{j-1}$ reduced, 
+            $\gid(h_{k-1}) \neq \gid(h_k)$).
+          \item $g^* \neq 1_{\gid(g_j)}$: 
+            Now $h_k g^* = g_{j+1} \neq 1_{\gid(g_j)}$ by assumption. Then
+              $x'_j = y g_{j+1}$ (case \#5), $x_j = y$ (case \#4) and $x_{j+1} = y g_{j+1}$ 
+                (case \#2, \#3).
+        \end{itemize}
+
+      \item otherwise $h_k g_j = \hat{g} \neq 1_{\gid(g_j)}$, let $y = h_1 \cdots h_{k-1}$:
+        \begin{itemize}
+          \item $g^* = 1_{\gid(g_j)}$: Then $x'_j = x_{j-1} = y h_k$ (case \#1), 
+            $x_j = y \hat{g}$ (case \#5) and
+            $x_{j+1} = y h_k$ (case \#5, since $\hat{g} g_{j+1} = h_k g_j g_{j+1} = h_k g^* = h_k \neq 1$). 
+          \item $g^* \neq 1_{\gid(g_j)}$: Let $\tilde{g} = h_k g^* = h_k g_j g_{j+1} = \hat{g} g_{j+1}$, 
+            then $x'_j = y \tilde{g}$ (case \#5), 
+            $x_j = y \hat{g}$ (case \#5) and
+            $x_{j+1} = y \tilde{g}$ (case \#5, since $\hat{g} g_{j+1} = \tilde{g}$). 
+      \end{itemize}
+    \end{itemize}
+    No matter which case, the result is that $x'_j = x_{j+1}$.
+    After appending the same factors $g_{j+2} \cdots g_n$, the output should be the same, hence
+    $r(w) = r(w')$. Extend the result to an sequence of operations of word, we conclude that
+    $w \sim w' \implies r(w) = r(w')$. Then if $w$ is equivalent to two reduced word $w', w''$,
+    then $w' \sim w''$ hence $r(w') = r(w'')$. But we proved that $r(x) = x$ if $x$ is a reduced word,
+    hence $w' = w''$.
+
+    Finally, notice that if $w$ is not a reduced word, it means that we could preforming a reducing
+    operation on $w$. After a reducing operation, the length of the word decrease. Since the length
+    couldn't decrease below $0$, eventually we would get a reduced word $w'$ which is equivalent to
+    $w$.
+    
+    Combine the result above, we conclude that every word $w$ is equivalent to exactly one reduced
+    word, and hence each equivalent class has exactly one reduced word.
   \end{proof}
 
   \begin{proposition}
