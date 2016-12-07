@@ -254,7 +254,8 @@
 
 \begin{document}
   \begin{definition}
-    Let $\mathcal{S} = \{ G_\alpha : \alpha \in \mathcal{A} \}$ be a nonempty set of groups $G_{\alpha}$.
+    Let $\mathcal{S} = \{ G_\alpha : \alpha \in \mathcal{A} \}$ be a nonempty set of groups $G_{\alpha}$
+    (We shall assume that these groups are disjoint).
     The {\bf free product} of $\mathcal{S}$ is a pair $(G, \{i_\alpha\})$ where $G$ is a group
     and $i_{\alpha} :: G_\alpha \to G$ are homomorphism which has the following universal property:
     For any group $H$ and homomorphisms $\varphi_\alpha :: G_\alpha \to H$, 
@@ -290,30 +291,30 @@
 
 
   \begin{definition}
-    A {\bf word} (respect to free product) is a finite sequence $g_1 g_2 \cdots g_n$ such that
-    each $g_i$ is in some $G_\alpha$, and each $g_i$ in it is called a {\bf factor}.
+    A {\bf word} (with respect to a free product) is a finite sequence $g_1 g_2 \cdots g_n$ such that
+    every $g_i$ is in one of $G_\alpha$. Each $g_i$ in it is called a {\bf factor}.
     We shall denote the empty word by $1$. The {\bf length}
     of a word is the number of factors in it. Define $W(\{G_\alpha\})$ or simply $W$ 
-    to be the set of all the words. For each $g$, let $\gid(g)$ be the group which $g$ belongs, 
+    to be the set of all of the words. For each $g$, let $\gid(g)$ be the group which $g$ belongs, 
     and $g^{-1}$ be the inverse of $g$ in that group.
 
     Write $xy$ as the {\bf concatenate} of two words $x, y$.
 
-    We define two {\bf reducing} operations on words
+    We define two {\bf reducing operations} on words
     \begin{enumerate}
       \item Drop a factor $g_i$ which is the identity element.
       \item Collapse two factors $g_i g_{i+1}$ to a single one $g^*$ if $\gid(g_i) = \gid(g_{i+1})$
         and their product in that group is $g^*$.
     \end{enumerate}
-    Together with the inverse of these two reducing operations, we have four operations
+    Together with the inverse of these two reducing operations, we have four {\bf operations}
     that could alter a word.
 
     Two words $x$ and $y$ are said to be {\bf equivalent} if there is a finite sequence of 
     operations that change $x$ to $y$.
 
-    A word $x$ is a {\bf reduced word} if no reducing operation could be preform on it. That is,
-    $x$ contains no factor $g_i$ which is the identity of a group $G_\alpha$ and contains no
-    two consecutive factors $g_i, g_{i+1}$ that lies in the same group.
+    A word $x$ is a {\bf reduced word} if no reducing operation could be preformed on it. That is,
+    $x$ contains no factor $g_i$ which is the identity of a group $G_\alpha$, and contains no
+    consecutive factors $g_i, g_{i+1}$ that belong to the same group.
   \end{definition}
   \begin{proposition}
     The statement above defines a valid equivalent relation $\sim$.
@@ -324,7 +325,7 @@
       \item $x \sim x$ clearly from definition.
       \item $x \sim y \implies y \sim x$ since we have inverse operations.
       \item $x \sim y \land y \sim z \implies x \sim z$ since we could combine the sequence 
-        of operations that changes $x$ to $y$ and changes $y$ to $z$ to obtain a sequence 
+        of operations that changes $x$ to $y$ and that changes $y$ to $z$ to obtain a sequence 
         of operations that changes $x$ to $z$.
     \end{itemize}
   \end{proof}
@@ -335,21 +336,21 @@
 
   \begin{proof}[Proof of existence]
     Denote the equivalence classes by $[x]$ using the equivalence relation mentioned above.
-    Let $G = W\!/\mathord\sim = \{ [x] : x \in W \}$ and define the multiplication as 
+    Let $G = W\!/\mathord\sim = \big\{ [x] : x \in W \big\}$ and define the multiplication as 
     $[x][y] = [xy]$. We shall check that the multiplication is well defined.
 
     Suppose that $x$ and $x'$ differ by only one operations. Then for all $y$, it is easy to 
-    see that $xy \sim x'y$ and $yx \sim yx'$ since we could still preform the same kind of 
-    operation on the $x, x'$ part and turn the former word to the later. Iteration of this
-    kind of relationship show that $v \sim v'$ and $w \sim w'$ implies $vw \sim v'w'$. Hence 
+    see that $xy \sim x'y$ and $yx \sim yx'$ since we could still preform that 
+    operation on the $x, x'$ part and turn the former word to the later. Iterating this
+    kind of equivalence shows that $v \sim v'$ and $w \sim w'$ implies $vw \sim v'w'$. Hence 
     the multiplication is well defined.
 
     Then we check that with this multiplication, $G$ is indeed a group.
     \begin{description}[style=standard]
-      \item[associative:] Simply by the associative of word concatenate.
+      \item[associative:] Simply by the associative of word concatenation.
       \item[indentity:] The equivalent class of empty word $[1]$ is the indentity obviously.
       \item[inverse:] For any word $x = g_1 g_2 \cdots g_n$. Let $y = g^{-1}_n g^{-1}_{n-1} \cdots g^{-1}_1$.
-        It is easy to see that $xy = yx = 1$, hence $[x][y] = [y][x] = [1]$.
+        It is easy to see that $[xy] = [yx] = [1]$, hence $[x][y] = [y][x] = [1]$.
     \end{description}
     Let $i_\alpha(g) = [g]$, then each $i_\alpha$ is a homomorphism since $i_\alpha(g_1 g_2) = [g_1 g_2]
     = [g_1] [g_2] = i_\alpha(g_1) i_\alpha(g_2)$.
@@ -372,38 +373,47 @@
         = \Phi(w_1) \Phi(1_{G_\alpha}) \Phi(w_2) = \Phi(w_1) \varphi_\alpha(1_{G_\alpha}) \Phi(w_2)
         = \Phi(w_1) \Phi(w_2) = \Phi(w_1 w_2)$ by the fact that every homomorphism $\varphi_\alpha$ maps
         identity to identity.
-      \item $\Phi(w_1 g w_2) = \Phi(w_1 g_1 g_2 w_2)$, if $g = g_1 g_2$: WLOG assume $g \in G_\alpha$, then 
-        $\Phi(w_1 g w_2) = $ \\
-        $ \Phi(w_1) \phi_\alpha(g) \Phi(w_2) = \Phi(w_1) \phi_\alpha(g_1 g_2) \Phi(w_2)
+      \item $\Phi(w_1 g^* w_2) = \Phi(w_1 g_1 g_2 w_2)$, if $g^* = g_1 g_2$: WLOG assume $g^* \in G_\alpha$, then 
+        $\Phi(w_1 g^* w_2) = $ \\
+        $ \Phi(w_1) \phi_\alpha(g^*) \Phi(w_2) = \Phi(w_1) \phi_\alpha(g_1 g_2) \Phi(w_2)
         = \Phi(w_1) \phi_\alpha(g_1) \phi_\alpha(g_2) \Phi(w_2) = \Phi(w_1 g_1 g_2 w_2)$. 
     \end{itemize}
-    Hence if $w \sim w'$, using the two equalities above and iterate through a sequences of
-    operator that changes $w$ to $w'$, we found that $\Phi(w) = \Phi(w')$, thus $\varphi$ is
+    Hence if $w \sim w'$, using the two equalities above and iterating through a sequences of
+    operations that changes $w$ to $w'$, we found that $\Phi(w) = \Phi(w')$, thus $\varphi$ is
     well defined. Also $\varphi([w_1][w_2]) = \varphi([w_1 w_2]) = \Phi(w_1 w_2) = \Phi(w_1) \Phi(w_2)
     = \varphi([w_1]) \varphi([w_2])$, so $\varphi$ is indeed a homomorphism.
 
     Finally, we show that $\varphi$ is unique. It is easy to see that each element
-    $[w] \in G$ could be generate by the equivalent classes of words with length $1$, 
+    $[w] \in G$ could be generate by $\big\{[g] : g \in \bigcup_\alpha G_\alpha\big\}$,
+    the equivalent classes of words with length $1$, 
     and for each $g_\alpha$ in each $G_\alpha$, $\varphi([g_\alpha]) = \varphi(i_\alpha(g_\alpha)) =
     \varphi_\alpha(g_\alpha)$ is determined, hence $\varphi$ is unique.
   \end{proof}
 
   \begin{proof}[Proof of uniqueness]
-    The $G$ constructed above is a coproduct. By the uniqueness of coproduct, the proof is complete.
+    The $G$ constructed above is a coproduct of $\{G_\alpha\}$. By the uniqueness of coproduct, the proof is complete.
+
+    Or we could proof it in the old-fashioned way. If $(G', \{i'_\alpha\})$ is another pair that satisfies
+    the universal property. By the univeral property of $G$, exists $\varphi$, $\varphi \circ i_s = i'_s$.
+    Swapping the roles of $G$ and $G'$, we know that exists $\varphi'$, $\varphi' \circ i'_s = i_s$.
+    So $\varphi' \circ \varphi \circ i_s = i_s$, but notice that the identity mapping $1_G$ also
+    satisfies $1_G \circ i_s = i_s$. By the uniqueness of mapping in the definition of
+    universal property, we have $1_G = \varphi' \circ \varphi$, similary $1_{G'} = \varphi \circ \varphi'$
+    so $\varphi$ 1-1 onto and hence $G \cong G'$.
   \end{proof}
 
-  Since we construct free product by equivalence classes, some may wish to find a canonical
+  Since we construct the free product by equivalence classes, some may wish to find a canonical
   representative for each equivalence class. So we prove the following proposition.
 
   \begin{proposition}
-    Each word is equivalent to exactly one reduced word, and hence each equivalent class
+    Each word is equivalent to exactly one reduced word, and hence each equivalence class
     has a unique reduced word.
   \end{proposition}
 
   \begin{proof}
     Let $w = g_1 g_2 \cdots g_n$ is a word in $W$. We associate to $w$ a sequence of reduced words
     $x_0, x_1, \cdots, x_n$ in $W$ define by the following recursive algorithm: \\
-    Let $x_0 = 1$, the empty word. If $x_{i-1} = h_1 \cdots h_k$ (when $x_{i-1}$ is an empty word, $k = 0$),
+    Let $x_0$ be the empty word $1$. If $x_{i-1} = h_1 h_2 \cdots h_k$ (when $x_{i-1}$ is an empty word, $k = 0$),
     define $x_i$ by
     \[
       x_i = \begin{cases}
@@ -418,10 +428,11 @@
 
     Then we could check inductively such that for each $i$, the following holds:
     \begin{itemize}
-      \item $x_i \sim g_1 g_2 \cdots g_i$, since in every cases $x_i$ could be transformed from $x_{i-1} g_i$
+      \item $x_i \sim g_1 g_2 \cdots g_i$: By induction, $x_{i-1} \sim g_1 g_2 \cdots g_{i-1}$.
+        Since in each case $x_i$ could be transformed from $x_{i-1} g_i$
         by some reducing operations. And we've already prove that $x \sim x', y \sim y' \implies xy \sim x'y'$,
         hence $x_i \sim x_{i-1} g_i \sim g_1 g_2 \cdots g_i$.
-      \item Each $x_i$ is a reduced word. Since by induction we know that $x_{i-1} = h_1 \cdots h_k$ is reduced. 
+      \item Each $x_i$ is a reduced word: Since by induction we know that $x_{i-1} = h_1 \cdots h_k$ is reduced. 
         So if $x_i$ is obtain by case \#$1, 2, 4$, $x_i$ is a reduced word. In case \#3, because $g_i \neq 1_{\gid(g_i)}$
         and $\gid(g_i) \neq \gid(h_k)$, and in case \#5, $g^* \neq 1_{\gid(g^*)} \text{ and } \gid(g^*) = h_k \neq h_{k-1}$,
         so $x_i$ is a reduced word in both case.
@@ -441,12 +452,13 @@
     Next consider the equivalent words
     \[ w = g_1 \cdots g_{j-1} g_j g_{j+1} g_{j+2} \cdots g_n 
       \quad\text{and}\quad w' = g_1 \cdots g_{j-1} g^* g_{j+2} \cdots g_n \]
-    similarly, would induce $x_0, \cdots, x_n$ and $x'_0, \cdots, x'_{n-1}$ by the algorithm above and
+    Similarly, they would induce $x_0, \cdots, x_n$ and $x'_0, \cdots, x'_{n-1}$, and
     we have $x_{j-1} = x'_{j-1}$. Let $x_{j-1} = h_1 h_2 \cdots h_k$. 
     Now there are a lot of painful cases to check.
     \begin{itemize}
-      \item $g_j = 1_{\gid(g_j)}$: Then $g^* = g_{j+1}$, so this case turn out to be the case above. ($w$
-        is formed by inserting an identity in $w'$). Similar argument holds when $g_{j+1} = 1_{\gid(g_j)}$,
+      \item $g_j = 1_{\gid(g_j)} \text{ or } g_{j+1} = 1_{\gid(g_{j+1})}$: 
+        If $g_j = 1_{\gid(g_j)}$ then $g^* = g_{j+1}$, so this case turn out to be the case above ($w$
+        is formed by inserting an identity into $w'$). Similar argument holds when $g_{j+1} = 1_{\gid(g_j)}$,
         hence we could assume $g_j, g_{j+1} \neq 1_{\gid(g_j)}$ below.
       \item otherwise, $k = 0$, or $k \neq 0$ but $\gid(h_k) \neq \gid(g_j)$. There are two cases:
         \begin{itemize}
@@ -461,8 +473,8 @@
           \item $g^* = 1_{\gid(g_j)}$: Then $g_j g_{j+1} = g^* = 1 = h_k g_j$, which forces
             $h_k = g_{j+1} = g^{-1}_j \neq 1_{\gid(g_j)}$.  
             Hence $x'_j = x_{j-1}$ (case \#1), $x_j = h_1 \cdots h_{k-1}$
-            (case \#4) and $x_{j+1} = h_1 \cdots h_k = x_{j-1}$ (case \#3, since $x_{j-1}$ reduced, 
-            $\gid(h_{k-1}) \neq \gid(h_k)$).
+            (case \#4) and $x_{j+1} = h_1 \cdots h_k = x_{j-1}$ (case \#2 or \#3, since $x_{j-1}$ reduced, 
+            $k-1 = 0$ or $\gid(h_{k-1}) \neq \gid(h_k) = \gid(g_{j+1})$).
           \item $g^* \neq 1_{\gid(g_j)}$: 
             Now $h_k g^* = g_{j+1} \neq 1_{\gid(g_j)}$ by assumption. Then
               $x'_j = y g_{j+1}$ (case \#5), $x_j = y$ (case \#4) and $x_{j+1} = y g_{j+1}$ 
@@ -483,13 +495,13 @@
     No matter which case, the result is that $x'_j = x_{j+1}$.
     After appending the same factors $g_{j+2} \cdots g_n$, the output should be the same, hence
     $r(w) = r(w')$. Extend the result to an sequence of operations of word, we conclude that
-    $w \sim w' \implies r(w) = r(w')$. Then if $w$ is equivalent to two reduced word $w', w''$,
+    $w \sim w' \implies r(w) = r(w')$. If $w$ is equivalent to two reduced word $w', w''$,
     then $w' \sim w''$ hence $r(w') = r(w'')$. But we proved that $r(x) = x$ if $x$ is a reduced word,
     hence $w' = w''$.
 
-    Finally, notice that if $w$ is not a reduced word, it means that we could preforming a reducing
-    operation on $w$. After a reducing operation, the length of the word decrease. Since the length
-    couldn't decrease below $0$, eventually we would get a reduced word $w'$ which is equivalent to
+    Finally, notice that if $w$ is not a reduced word, by definition it means that we could preform a reducing
+    operation on $w$. After a reducing operation, the length of the word decrease. Repeat this process.
+    Since the length couldn't decrease below $0$, eventually we would get a reduced word $w'$ which is equivalent to
     $w$.
     
     Combine the result above, we conclude that every word $w$ is equivalent to exactly one reduced
@@ -517,7 +529,7 @@
 
   \begin{proposition}
     Let $\mathcal{S} = \{ G_\alpha : \alpha \in \mathcal{A} \}$ be a set of groups, and suppose that
-    $\big\langle S_\alpha \bigm| R_\alpha \big\rangle$ is a presentation, then 
+    $\big\langle S_\alpha \bigm| R_\alpha \big\rangle$ is a presentation for each $G_\alpha$, then 
     $\Big\langle \bigcup\limits_\alpha S_\alpha \mathrel{\Big|} \bigcup\limits_\alpha R_\alpha \Big\rangle$
     is a presentation of the free product $\freeprod_\alpha G_\alpha$.
   \end{proposition}
@@ -536,12 +548,12 @@
     Now by the universal property of the free group, there exist a map 
     $\tilde{f}_\alpha :: F(S_\alpha) \to F(S)$. It is easy to see that $\tilde{f}_\alpha$
     simply maps a word $w \in F(S_\alpha)$ to the same word in $F(S)$.
-    Compose with the quotient map $q$ from $F(S)$ to $G = F(S) / N(R)$, we get a map $f_\alpha$ from
+    Compose with the quotient map $q$ from $F(S)$ to $F(S) / N(R) = G$, we get a map $f_\alpha$ from
     $F(S_\alpha)$ to $G$. 
 
     Now, let $q_\alpha$ be the quotient map from $F(S_\alpha)$ to $G_\alpha$.
     For each word $r \in R_\alpha \subseteq F(S_\alpha)$, $\tilde{f}_\alpha$ send $r$ into $R$,
-    so $f_\alpha(r) = 1_G$, hence $\ker q_\alpha = N(R_\alpha) \subseteq \ker f$ since $N(R_\alpha)$ is the smallest
+    so $f_\alpha(r) = 1_G$, hence $\ker q_\alpha = N(R_\alpha) \subseteq \ker f_{\alpha}$ since $N(R_\alpha)$ is the smallest
     normal subgroup containing $R_\alpha$ and a kernal is always normal. By factor theorem, $f_\alpha$
     descends to a homomorphism $i_\alpha :: G_\alpha \to G$.
 
@@ -549,17 +561,17 @@
     of free product we would have $G \cong \freeprod_\alpha G_\alpha$.
 
     Let $H$ be a group, and let $\varphi_\alpha :: G_\alpha \to H$ be a system of homomorphisms.
-    Consider $\tilde{\varphi}_\alpha :: F(S_\alpha) \to H$ by $\tilde{\varphi}_\alpha = \varphi \circ q_\alpha$.
+    Consider $\tilde{\varphi}_\alpha :: F(S_\alpha) \to H$ by $\tilde{\varphi}_\alpha = \varphi_\alpha \circ q_\alpha$.
     Define $\tilde{g} :: S \to H$ which sending $x \in S$ by
     \begin{enumerate}
-      \item First carry $x$ to one of $S_\alpha$ by the inverse of inclusion map $\iota^{-1}$, 
-        it could be done since $S_\alpha$ is consider to be disjoint.
-      \item Then send into $F(S_\alpha)$ by the mapping given by the free group.
-      \item Finally send into $H$ by $\tilde{\varphi}_\alpha$.
+      \item First carry $x$ to one of the $S_\alpha$ by the inverse of inclusion map $\iota^{-1}$, 
+        it could be done since $\{S_\alpha\}$ is consider to be disjoint.
+      \item Then carry it into $F(S_\alpha)$ by the mapping given by the free group.
+      \item Finally carry it into $H$ by $\tilde{\varphi}_\alpha$.
     \end{enumerate}
     Since $F(S)$ is the free group of $S$, by its universal property, exists a homomorphism $g :: F(S) \to H$.
     Now for each $r \in R \subseteq F(S)$, $r$ lies in a unique $R_\alpha$, so
-    \[ g(r) = \tilde{q}_\alpha(r) = \varphi_\alpha(q_\alpha(r)) = \varphi_\alpha(1_{G_\alpha}) = 1_H. \]
+    \[ g(r) = \tilde{\varphi}_\alpha(r) = \varphi_\alpha(q_\alpha(r)) = \varphi_\alpha(1_{G_\alpha}) = 1_H. \]
     Consequently $\ker q = N(R) \subseteq \ker g$, and by factor theorem, $g$ descends into a
     homomorphism $\varphi :: G \to H$. This $\varphi$ satisfies:
     \[
@@ -606,27 +618,30 @@
         (m-2-3.0) edge node[midway, below]{$\varphi$} (m-1-4.270);
 
         \path[-latex]
-        (m-1-2) edge node[pos=0.35, left]{$\tilde{f}$} (m-2-2);
+        (m-1-2) edge node[pos=0.35, left, xshift=0.5mm]{$\tilde{f}_\alpha$} (m-2-2);
 
         \path[-latex]
-        (m-1-2) edge node[pos=0.3, above]{$f$} (m-2-3);
+        (m-1-2) edge node[pos=0.3, above, xshift=0.5mm]{$f_\alpha$} (m-2-3);
 
         \path[-latex]
         (m-1-1) edge node[midway, above]{$\psi$} (m-2-2);
 
         \path[-latex]
-        (m-2-1) edge node[pos=0.65, above, yshift=-0.5mm]{$g$} (m-1-4);
+        (m-2-1) edge node[pos=0.63, above, yshift=-0.5mm]{$\tilde{g}$} (m-1-4);
 
         \path[-latex]
-        (m-2-2) edge node[pos=0.8, below, yshift=0.5mm]{$\tilde{g}$} (m-1-4.210);
+        (m-2-2) edge node[pos=0.8, below, yshift=0.5mm]{$g$} (m-1-4.210);
+
+        \path[-latex]
+        (m-1-2) edge[bend left=25] node[midway, above, yshift=0.0mm]{$\tilde{\varphi}_\alpha$} (m-1-4);
 
         %\path[-latex]
         %(m-1-1) edge node[midway, below left, xshift=0.1cm, yshift=0.1cm]{$\varphi_\alpha$} (m-2-2);
       \end{tikzpicture}
-      \caption{The compute diagram in the proof.}
+      \caption{The commute diagram in the proof.}
     \end{figure}
 
-    Finally, for the uniqueness of $\varphi$, if $\varphi_\alpha = i_\alpha \circ \varphi$, 
+    Finally, for the uniqueness, if $\varphi$ makes $\varphi_\alpha = i_\alpha \circ \varphi$, 
     then consider $h = \varphi \circ q$, since
     \[ \varphi_\alpha \circ q_\alpha = \varphi \circ i_\alpha \circ q_\alpha
       = \varphi \circ f_\alpha = \varphi \circ q \circ \tilde{f}_\alpha = h \circ \tilde{f}_\alpha. \]
@@ -635,7 +650,7 @@
     words with length $1$), hence $h$ is uniquely determined. Since $q$ is onto, we conclude 
     that $\varphi$ is also uniquely determined.
 
-    Hence we prove that $G$ satisfies the universal property, and hence 
+    Hence we prove that $G$ satisfies the universal property, and
     $ \Big\langle \bigcup\limits_\alpha S_\alpha \mathrel{\Big|} \bigcup\limits_\alpha R_\alpha \Big\rangle
     \cong \freeprod_\alpha G_\alpha $.
   \end{proof}
@@ -646,12 +661,12 @@
   \end{example}
 
   \begin{definition}
-    Let $\mathcal{C}$ be a category, $X, Y, Z$ be objects, and $f :: Z \to X, g :: Z \to Y$ are
+    Let $\mathcal{C}$ be a category, $X, Y, Z$ be objects, and $f :: Z \to X,\ g :: Z \to Y$ are
     two morphisms. The {\bf pushout} of the morphisms $f, g$ is a tuple $(P, i_1, i_2)$ such
-    that $P$ is an object, $i_1 :: X \to P, i_2 :: Y \to P$ such that $i_1 \circ f = i_2 \circ g$,
+    that $P$ is an object, $i_1 :: X \to P,\ i_2 :: Y \to P$ with $i_1 \circ f = i_2 \circ g$,
     and $(P, i_1, i_2)$ has the following universal property: 
-    For any $(Q, j_1, j_2)$ satisfied $j_1 \circ f = j_2 \circ g$, there is a unique $\varphi :: P \to Q$
-    that makes $\varphi \circ i_1 = j_1, \varphi \circ i_2 = j_2$.
+    For any $(Q, j_1, j_2)$ satisfying $j_1 \circ f = j_2 \circ g$, there is an unique morphism 
+    $\varphi :: P \to Q$ that makes $\varphi \circ i_1 = j_1, \varphi \circ i_2 = j_2$.
     
     A common notation is $P = X \sqcup_{Z} Y$.
   \end{definition}
@@ -659,29 +674,134 @@
   \begin{definition}
     The amalgamated free product $G_1 \ast_F G_2$ is the pushout $G_1 \sqcup_{F} G_2$. That
     is, given $\psi_1 :: F \to G_1, \psi_2 :: F \to G_2$, the amalgamated free product is a tuple
-    $(G, i_1, i_2)$ such that $G$ is a group, $i_1, i_2$ are homomorphisms from $G_1, G_2$ to
-    $G$, respectively, and $i_1 \circ \psi_1 = i_2 \circ \psi_2$. It should also satisfied
-    the universal property, given $(H, j_1, j_2)$ such that $H$ is a group,
-    $j_1, j_2$ are homomorphisms from $G_1, G_2$ to
-    $H$, and $j_1 \circ \psi_1 = j_2 \circ \psi_2$, then there exists a unique homomorphism
-    $\phi$ such that $j_1 = \varphi \circ i_1, j_2 = \varphi \cir i_2$.
+    $(G, i_1, i_2)$ such that $G$ is a group, $i_1, i_2$ are homomorphisms from $G_1$ to $G$ and
+    $G_2$ to $G$, respectively, with $i_1 \circ \psi_1 = i_2 \circ \psi_2$. It should also satisfied
+    the following universal property: given $(H, j_1, j_2)$ such that $H$ is a group,
+    $j_1, j_2$ are homomorphisms from $G_1$ to $H$ and $G_2$ to
+    $H$, with $j_1 \circ \psi_1 = j_2 \circ \psi_2$, then there exists a unique homomorphism
+    $\varphi$ such that $j_1 = \varphi \circ i_1, j_2 = \varphi \circ i_2$.
   \end{definition}
 
-  \begin{theorem}
+  \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+      \matrix (m) [matrix of math nodes, row sep=2.5em, column sep=3em] {
+        & G_1 & & \\
+        F & G_1 \ast_F G_2 & & H \\
+        & G_2 & & \\
+      };
+      \path[-latex]
+      (m-2-1) edge node[midway, xshift=-2mm, yshift=2mm]{$\psi_1$} (m-1-2);
+      \path[-latex]
+      (m-2-1) edge node[midway, xshift=-2mm, yshift=-2mm]{$\psi_2$} (m-3-2);
+      \path[-latex]
+      (m-1-2) edge node[right]{$i_1$} (m-2-2);
+      \path[-latex]
+      (m-3-2) edge node[right]{$i_2$} (m-2-2);
+
+      \path[-latex]
+      (m-1-2) edge node[midway, xshift=2mm, yshift=2mm]{$j_1$} (m-2-4);
+      \path[-latex]
+      (m-3-2) edge node[midway, xshift=2mm, yshift=-2mm]{$j_2$} (m-2-4);
+
+      \path[-latex]
+      (m-2-2) edge node[pos=0.4, above]{$\varphi$} (m-2-4);
+    \end{tikzpicture}
+    \caption{The diagram of the amalgamated free product}
+  \end{figure}
+
+  \begin{proposition}
     Amalgamate free product exists and is unique up to isomorphism.
-  \end{theorem}
+  \end{proposition}
 
-  \begin{remark}
-    The Amalgamate free product $G_1 \ast_F G_2$ could be constructed by
-    $(G_1 \ast G_2) / N$, where $N$ is the smallest normal subgroup containing
-    $\{ \psi_1(x) \psi_2(x)^{-1} : x \in F \}$ in $G_1 \ast G_2$.
-  \end{remark}
+  \begin{proof}
+    Consider the free product $G_1 \ast G_2$, where $\tilde{i_1}, \tilde{i_2}$ are
+    homomorphisms given by the free product from $G_1$ to $G_1 \ast G_2$ and $G_2$ to $G_1 \ast G_2$.
 
-  For readers interested in applications of free product, one could refer to the
+    We construct $G_1 \ast_F G_2 = (G_1 \ast G_2) / N$,
+    where $N$ is the smallest normal subgroup containing the elements
+    $\left\{ \left[\psi_1(x) \psi_2(x)^{-1}\right] : x \in F \right\}$ in $G_1 \ast G_2$.
+    Let $q$ be the quotient map $G_1 \ast G_2 \to G_1 \ast G_2 / N$ and
+    $i_1 = q \circ \tilde{i}_1, i_2 = q \circ \tilde{i}_2$. Then for all $x \in F$,
+    \[ i_1(\psi_1(x))\, i_2(\psi_2(x))^{-1}
+      = q(\tilde{i}_1(\psi_1(x))) \, q\big(\tilde{i}_2\left(\psi_2(x)^{-1}\right)\big)
+      = q \big([\psi_1(x)][\psi_2(x)^{-1}]\big) = q([\psi_1(x)\psi_2(x)^{-1}]) = 1
+    \]
+    Hence $i_1(\psi_1(x)) = i_2(\psi_2(x)), \forall x \implies i_1 \circ \psi_1 = i_2 \circ \psi_2$.
+
+    Now, given $H, j_1, j_2$. By the universal property of free product, exists $\tilde{\varphi}$ such
+    that $\tilde{\varphi} \circ \tilde{i}_\alpha = j_\alpha$ for $\alpha \in \{1, 2\}$.
+
+    Next, for all $x \in F$, $[\psi_1(x) \psi_2(x)^{-1}] = [\psi_1(x)] [\psi_2(x)^{-1}]
+    = \tilde{i}_1(\psi_1(x))\, \tilde{i}_2\big(\psi_2(x)^{-1}\big)$, so
+    \[ \tilde{\varphi}\big([\psi_1(x) \psi_2(x)^{-1}]\big) = 
+      (\tilde{\varphi} \circ \tilde{i}_1) (\psi_1(x))\, 
+      (\tilde{\varphi} \circ \tilde{i}_2) \big(\psi_2(x)^{-1}\big)
+      = (j_1 \circ \psi_1)(x) \, \big((j_2 \circ \psi_2)(x)\big)^{-1} = 1 \]
+    since $j_1 \circ \psi_1 = j_2 \circ \psi_2$. By the fact that $N$ is the smallest
+    normal subgroup containing \\
+    $\left\{ \left[\psi_1(x) \psi_2(x)^{-1}\right] : x \in F \right\}$,
+    we conclude that $N \subseteq \ker \tilde{\varphi}$, and consequently $\tilde{\varphi}$
+    descends into a homomorphism $\varphi :: G_1 \ast_F G_2 \to H$. And we have
+    $ \varphi \circ i_\alpha = \varphi \circ q \circ \tilde{i}_\alpha = \tilde{i}_\alpha \circ \tilde{\varphi}
+    = j_\alpha $ for $\alpha \in \{1, 2\}$, hence $\varphi$ satisfies the requirements.
+
+    Finally, for the uniqueness, suppose $\varphi$ makes $j_\alpha = i_\alpha \circ \varphi$ for
+    $\alpha \in \{1, 2\}$.
+    then consider $h = \varphi \circ q$, since
+    $ h \circ \tilde{i}_\alpha = \varphi \circ q \circ \tilde{i}_\alpha = i_\alpha \circ \varphi = j_\alpha$
+    So $h$ is determined for all $x \in \Image{\tilde{i}_1} \cup \Image{\tilde{i}_2}$. But 
+    $\Image{\tilde{i}_1} \cup \Image{\tilde{i}_2}$ contains all the generators of $G_1 \ast G_2$ 
+    (i.e., all the reduced words with length $1$ and the empty word),
+    hence $h$ is uniquely determined. Since $q$ is onto, we conclude 
+    that $\varphi$ is also uniquely determined.
+
+    \begin{figure}[h]
+      \centering
+      \begin{tikzpicture}
+        \matrix (m) [matrix of math nodes, row sep=2.5em, column sep=3em] {
+           & & G_1 & & \\
+           F & G_1 \ast G_2 & G_1 \ast_F G_2 & & H \\
+           & & G_2 & & \\
+        };
+        \path[-latex]
+        (m-2-1) edge node[midway, xshift=-2mm, yshift=2mm]{$\psi_1$} (m-1-3);
+        \path[-latex]
+        (m-2-1) edge node[midway, xshift=-2mm, yshift=-2mm]{$\psi_2$} (m-3-3);
+        \path[-latex]
+        (m-1-3) edge node[right]{$i_1$} (m-2-3);
+        \path[-latex]
+        (m-3-3) edge node[pos=0.4, right]{$i_2$} (m-2-3);
+
+        \path[-latex]
+        (m-1-3) edge node[midway, xshift=2mm, yshift=2mm]{$j_1$} (m-2-5);
+        \path[-latex]
+        (m-3-3) edge node[midway, xshift=2mm, yshift=-2mm]{$j_2$} (m-2-5);
+
+        \path[-latex]
+        (m-2-3) edge node[pos=0.4, above]{$\varphi$} (m-2-5);
+
+        \path[-latex]
+        (m-1-3) edge node[midway, xshift=3mm, yshift=-1.2mm]{$\tilde{i}_1$} (m-2-2);
+
+        \path[-latex]
+        (m-3-3) edge node[midway, xshift=3.5mm, yshift=1mm]{$\tilde{i}_2$} (m-2-2);
+
+        \path[-latex]
+        (m-2-2) edge node[pos=0.4, above]{$q$} (m-2-3);
+
+        \path[-latex]
+        (m-2-2) edge[bend right=14] node[pos=0.6, below, yshift=0.5mm]{$\tilde{\varphi}$} (m-2-5);
+      \end{tikzpicture}
+      \caption{The diagram of groups and maps mentioned in the proof}
+    \end{figure}
+  \end{proof}
+
+  For readers interested in applications of free product, the textbook mentioned the
   {\bf Seifert–van Kampen theorem} in algebraic topology, which states that if $X$ is 
   a topological space which is the union of two open and path connected subspaces $U_1, U_2$,
   and there intersection is path connected and nonempty. Then the fundamental group
-  of $X$ is the free product of the fundamental groups $U_1, U_2$ with amalgamated by
+  of $X$ is the free product of the fundamental groups $U_1, U_2$ amalgamated by
   the fundamental groups of $U_1 \cup U_2$.
 
 \end{document}
